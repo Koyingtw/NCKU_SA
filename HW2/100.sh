@@ -24,20 +24,6 @@ function check_group_exist() {
     done
 }
 
-function add() {
-    username=$1
-    password=$2
-    shell=$3
-    groups=$4
-
-    check_group_exist ${groups//,/ }
-    if [ "$groups" = "" ] ; then
-        sudo echo $password | sudo pw useradd $username -m -h 0 -s $shell
-    else
-        sudo echo $password | sudo pw useradd $username -m -h 0 -s $shell -G $groups
-    fi
-}
-
 create_user_from_json() {
     username=$(echo "$1" | jq -r '.username')
     password=$(echo "$1" | jq -r '.password')
